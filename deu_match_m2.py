@@ -21,9 +21,7 @@ def nota_candidato(e_nota, t_nota, p_nota, s_nota):
         print('-'*90)           # por ex.: Nome: Matheus
         print(f'Candidato: {index}: {nome},  Nota: {nota}')
         print('=' * 90)
-
-    # este loop foi criado para percorrer as strings, buscar as casas de valores numéricos no índice de 'notas' para realizar sua conversão para inteiro
-    #for notas in candidatos:
+# loop desta linha foi realocado
         conv_e = int(nota[1])
         conv_t = int(nota[4])
         conv_p = int(nota[7])
@@ -33,8 +31,7 @@ def nota_candidato(e_nota, t_nota, p_nota, s_nota):
     # correção do uso do operador: aqui é realizado a comparação da nota mínima inserida pelo usuário com a nota do candidato pré-disponível,
     # se a nota mínima exigida for maior que a nota do candidato, ele é excluído da lista e não entra no .append()
         if e_nota <= conv_e and t_nota <= conv_t and p_nota <= conv_p and s_nota <= conv_s:
-            candidato_aprovado.append(nota)
-            print(f'Candidato(a): {nome} corresponde a este requisito com a nota {nota}'.upper())
+            candidato_aprovado.append(busca)
     print('\033[92mSigla: e = entrevista, t = exame teórico, p = exame prático, s = soft skills\033[92m')
     print('-'*90)
     
@@ -42,14 +39,17 @@ def nota_candidato(e_nota, t_nota, p_nota, s_nota):
 # da lista é verdadeira ou falsa e ser executada somente se/ou nenhum candidato corresponder e ser impresso somente se verdadeiro.
     if not candidato_aprovado:
        print('\033[91mNENHUM CANDIDATO CORRESPONDE A ESTES CRITÉRIOS\033[91m')
+       print('-'*90)
 
-    
-    #for busca in candidato_aprovado:
-       #print(f'Candidato(a) aprovado(a): Nome: {nome}, nota: {nota}')
-     #   print(f'Candidato(a) aprovado(a): Nome: {busca["Nome"]}, Nota: {busca["Nota"]}')
-    
-    return candidato_aprovado ## o retorno sempre deve estar em último lugar em relação aos loops e verificação, 
-#pois somente assim será possível pegar os resultados de forma adequada das condicionais e loops
+    # loop para percorrer os candidatos já verificados e adicionados na lista e imprime os resultados dados como verdadeiros
+    for busca in candidato_aprovado:
+        if True:
+            print(f'Candidato Aprovado:\nNome: {busca["Nome"]}, Nota: {busca["Nota"]}')
+        print('-' * 90)
+
+    return candidato_aprovado 
+## o retorno sempre deve estar em último lugar em relação aos loops e verificação, 
+#pois somente assim será possível pegar os resultados de forma adequada
 
 
 ## input para buscar os candidatos através dos critérios das notas 
@@ -71,3 +71,4 @@ candidato_aprovado = nota_candidato(e_nota, t_nota, p_nota, s_nota)
 #=========================================================================================================================#
 ## NOVAS CORREÇÕES: a ideia e mecânica do sistema é funcional, porém, considerando que esta lista poderia ter 50, 100 ou mais candidatos,
 # o ideal seria fornecer o resultado a parte, no rodapé do código. 
+#=========================================================================================================================#
