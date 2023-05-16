@@ -1,9 +1,9 @@
-
-   ## Lista de candidatos e suas respectivas notas                                   
+print('='*90)
+print('Lista de candidatos / suas respectivas notas'.upper())                                   
                                              #1 #4 #7 #10
 candidatos =       [{'Nome':'José', 'Nota':'e5_t3_p7_s8'},  
                     {'Nome':'Augusto', 'Nota':'e4_t5_p8_s7'},     # os : devem estar fora das aspas para que entenda a atribuição
-                    {'Nome':'Simone', 'Nota':'e5_t4_p9_s8'},      # dos índices ('Nome', 'Nota') aos seus valores ('José', 'eX_tX_pX_sX')
+                    {'Nome':'Simone', 'Nota':'e5_t5_p9_s8'},      # dos índices ('Nome', 'Nota') aos seus valores ('José', 'eX_tX_pX_sX')
                     {'Nome':'Patricia', 'Nota':'e4_t6_p8_s5'},
                     {'Nome':'Matheus', 'Nota' : 'e4_t4_p7_s8'}] 
 
@@ -20,27 +20,36 @@ def nota_candidato(e_nota, t_nota, p_nota, s_nota):
         nota = busca['Nota']    # acessar os índices dentro do colchetes, retornarão os valores correspondentes a eles, 
         print('-'*90)           # por ex.: Nome: Matheus
         print(f'Candidato: {index}: {nome},  Nota: {nota}')
-        print('-'*90)
-    print('Sigla: e = entrevista, t = exame teórico, p = exame prático, s = soft skills')
-    print('=' * 90)
+        print('=' * 90)
 
     # este loop foi criado para percorrer as strings, buscar as casas de valores numéricos no índice de 'notas' para realizar sua conversão para inteiro
-    for notas in candidatos:
-        conv_e = int(notas['Nota'][1])
-        conv_t = int(notas['Nota'][4])
-        conv_p = int(notas['Nota'][7])
-        conv_s = int(notas['Nota'][10])
-        #print(f'Nota de entrevista: {conv_e}, nota teórica: {conv_t}, nota prática: {conv_p}, nota soft skills: {conv_s}')
+    #for notas in candidatos:
+        conv_e = int(nota[1])
+        conv_t = int(nota[4])
+        conv_p = int(nota[7])
+        conv_s = int(nota[10])
+        
 
-    # aqui faremos a comparação das notas das strings convertidas em int, junto com a nota pedida nos inputs
-    if e_nota >= conv_e and t_nota >= conv_t and p_nota >= conv_p and s_nota >= conv_s:
-        candidato_aprovado.append(notas)
-        print(f'O candidato: {nome} corresponde a este requisito com a nota {nota}')
-    elif e_nota < conv_e and t_nota < conv_t and p_nota < conv_p and s_nota < conv_s:
-        print('Nenhum candidato corresponde a este requisito')
+    # correção do uso do operador: aqui é realizado a comparação da nota mínima inserida pelo usuário com a nota do candidato pré-disponível,
+    # se a nota mínima exigida for maior que a nota do candidato, ele é excluído da lista e não entra no .append()
+        if e_nota <= conv_e and t_nota <= conv_t and p_nota <= conv_p and s_nota <= conv_s:
+            candidato_aprovado.append(nota)
+            print(f'Candidato(a): {nome} corresponde a este requisito com a nota {nota}'.upper())
+    print('\033[92mSigla: e = entrevista, t = exame teórico, p = exame prático, s = soft skills\033[92m')
+    print('-'*90)
+    
+# aqui o if not está sendo usado por questão de praticidade e também de ordem, para testar se a condição
+# da lista é verdadeira ou falsa e ser executada somente se/ou nenhum candidato corresponder e ser impresso somente se verdadeiro.
+    if not candidato_aprovado:
+       print('\033[91mNENHUM CANDIDATO CORRESPONDE A ESTES CRITÉRIOS\033[91m')
 
-    # após a verificação, ele joga o candidato para dentro da lista candidato_aprovado
-    return candidato_aprovado
+    
+    #for busca in candidato_aprovado:
+       #print(f'Candidato(a) aprovado(a): Nome: {nome}, nota: {nota}')
+     #   print(f'Candidato(a) aprovado(a): Nome: {busca["Nome"]}, Nota: {busca["Nota"]}')
+    
+    return candidato_aprovado ## o retorno sempre deve estar em último lugar em relação aos loops e verificação, 
+#pois somente assim será possível pegar os resultados de forma adequada das condicionais e loops
 
 
 ## input para buscar os candidatos através dos critérios das notas 
@@ -55,5 +64,10 @@ candidato_aprovado = nota_candidato(e_nota, t_nota, p_nota, s_nota)
 
 ## CORREÇÕES NECESSÁRIAS NO CÓDIGO: Sem quebras, porém o sistema de verificação não está condizendo os valores,
 # o que faz dar erro na checagem e não retorna o resultado satisfatório, o retorno é sempre o últio elemento
-# quando a verificação é positiva, excluindo outros candidatos possíveis. 
-# CORREÇÕES POSSÍVEIS: Sistema de fatiamento para conversão de str > int
+# quando a verificação é positiva, excluindo outros candidatos possíveis. (corrigido)
+
+# CORREÇÕES POSSÍVEIS: Sistema de fatiamento para conversão de str > int (corrigido)
+
+#=========================================================================================================================#
+## NOVAS CORREÇÕES: a ideia e mecânica do sistema é funcional, porém, considerando que esta lista poderia ter 50, 100 ou mais candidatos,
+# o ideal seria fornecer o resultado a parte, no rodapé do código. 
