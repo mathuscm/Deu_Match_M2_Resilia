@@ -12,20 +12,20 @@ print('='*90)
 def nota_candidato(e_nota, t_nota, p_nota, s_nota):
     candidato_aprovado = []
 
-    # buscando a nota dos candidatos na lista 
+    # função para buscar a nota dos candidatos na lista 
     for busca in (candidatos):
         
         nome = busca['Nome']     
         nota = busca['Nota']             
         
-        nota_e = int(nota[1])
-        nota_t = int(nota[4])
-        nota_p = int(nota[7])
-        nota_s = int(nota[10])
+        nota_entrevista = int(nota[1])
+        nota_teoria = int(nota[4])
+        nota_pratico = int(nota[7])
+        nota_soft = int(nota[10])
         
 
         # comparação da nota do candidato com a nota mínima inserida pelo usuário
-        if e_nota <= nota_e and t_nota <= nota_t and p_nota <= nota_p and s_nota <= nota_s:
+        if e_nota <= nota_entrevista and t_nota <= nota_teoria and p_nota <= nota_pratico and s_nota <= nota_soft:
             candidato_aprovado.append(busca)
     print('-'*90)        
     print('\033[34mSigla: e = entrevista, t = exame teórico, p = exame prático, s = soft skills')
@@ -44,7 +44,7 @@ def nota_candidato(e_nota, t_nota, p_nota, s_nota):
 
 while True:
         
-# entrada para buscar as notas dos candidatos
+# entrada para digitar as notas dos candidatos a serem buscadas
     e_nota = int(input('Qual o valor mínimo do resultado da entrevista? '))
     t_nota = int(input('Qual o valor mínimo do exame teórico? '))
     p_nota = int(input('Qual o valor mínimo do exame prático? '))
